@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="zh-CN" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=0">
+<!--    <link rel="stylesheet" href="../static/layuiadmin/layui/css/layui.css" media="all">-->
+    <link rel="stylesheet" th:href="@{/layuiadmin/layui/css/layui.css}" media="all">
+<!--    <link rel="stylesheet" href="../static/layuiadmin/style/admin.css" media="all">-->
+    <link rel="stylesheet" th:href="@{/layuiadmin/style/admin.css}" media="all">
+</head>
+
+<body  class="layui-layout-body">
+
+    <div class="layui-layout layui-layout-admin">
+
+        <div class="layui-header">
+
+            <a href="#####" style="margin-left: 15px; font-size: 40px">
+                <i class="layui-icon layui-icon-app" style="font-size: 25px; color: #8D8D8D;"></i>
+            </a>
+
+            <ul class="layui-nav" style="float: right;"  th:if="${not true}">
+                <li class="layui-nav-item">
+                    <a href="">控制台<span class="layui-badge">9</span></a>
+                </li>
+                <li class="layui-nav-item">
+                    <a href="">个人中心<span class="layui-badge-dot"></span></a>
+                </li>
+                <li class="layui-nav-item">
+                    <a href=""><img th:src="@{/img/头像.jpg}" class="layui-nav-img">我</a>
+                    <dl class="layui-nav-child">
+                        <dd><a href="javascript:;">修改信息</a></dd>
+                        <dd><a href="javascript:;">安全管理</a></dd>
+                        <dd><a href="javascript:;">退出</a></dd>
+                    </dl>
+                </li>
+            </ul>
+            <ul class="layui-nav" style="float: right;"  th:if="${not false}">
+                <li class="layui-nav-item">
+                    <a href="">登录</a>
+                </li>
+                <li class="layui-nav-item">
+                    <a href="">注册</a>
+                </li>
+
+            </ul>
+        </div>
+        <div class="layui-side layui-side-menu">
+            <IMG th:src="@{/img/icon.png}" width="600" style="margin-left: 30px">
+
+            <ul class="layui-nav layui-nav-tree " lay-filter="test">
+                <!-- 侧边导航: <ul class="layui-nav layui-nav-tree layui-nav-side"> -->
+                <li class="layui-nav-item">
+                    <a href="javascript:;">默认展开</a>
+                    <dl class="layui-nav-child ">
+                        <dd><a href="javascript:;">选项1</a></dd>
+                        <dd><a href="javascript:;">选项2</a></dd>
+                        <dd><a href="">跳转</a></dd>
+                    </dl>
+                </li>
+                <li class="layui-nav-item">
+                    <a href="javascript:;">解决方案</a>
+                    <dl class="layui-nav-child">
+                        <dd><a href="">移动模块</a></dd>
+                        <dd><a href="">后台模版</a></dd>
+                        <dd><a href="">电商平台</a></dd>
+                    </dl>
+                </li>
+                <li class="layui-nav-item"><a href="">产品</a></li>
+                <li class="layui-nav-item"><a href="">大数据</a></li>
+
+
+            </ul>
+            <br />
+            <a href="####" style="margin-left: 10%">
+                <i class="layui-icon layui-icon-login-qq layui-icon-left" style="font-size: 25px; color: black"></i>
+            </a>
+            <a href="####" style="margin-left: 10%">
+                <i class="layui-icon layui-icon-login-wechat" style="font-size: 25px; color: black"></i>
+            </a>
+            <a href="####" style="margin-left: 10%">
+                <i class="layui-icon layui-icon-login-weibo" style="font-size: 25px; color: black"></i>
+            </a>
+
+
+        </div>
+<!--        <div class="layui-body layui-bg-blue">内容</div>-->
+        <div class="layui-body">
+            <!-- 内容主体区域 -->
+            内容
+
+        </div>
+
+<!--        <div class="layui-footer layui-bg-green">底部</div>-->
+<!--        <div class="layadmin-body-shade" layadmin-event="shade"></div>-->
+    </div>
+
+
+    <script th:src="@{/layuiadmin/layui/layui.js}"></script>
+
+    <script>
+
+
+        layui.use(['element','jquery'], function(){
+            var element = layui.element;
+            var $=layui.jquery;
+            // $(".layui-body".fontsize(0))
+
+        });
+
+
+
+
+    </script>
+</body>
+</html>
+
