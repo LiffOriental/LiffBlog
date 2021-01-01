@@ -39,10 +39,10 @@
             </ul>
             <ul class="layui-nav" style="float: right;"  th:if="${not false}">
                 <li class="layui-nav-item">
-                    <a href="">登录</a>
+                    <button type="button" class="layui-btn" id="login" style="background-color: white;color: black">登录</button>
                 </li>
                 <li class="layui-nav-item">
-                    <a href="">注册</a>
+                    <button type="button" class="layui-btn" id="regist" style="background-color: white;color: black">注册</button>
                 </li>
 
             </ul>
@@ -102,7 +102,11 @@
 
 
     <script th:src="@{/layuiadmin/layui/layui.js}"></script>
-
+<!--    <script type="text/css">-->
+<!--        #shi{-->
+<!--            background-color: #ffffff;-->
+<!--        }-->
+<!--    </script>-->
     <script>
 
 
@@ -111,15 +115,26 @@
             var $=layui.jquery;
             var layer=layui.layer;
 
+            $('#login').click(function (){
+                layer.open({
+                    type: 2,
+                    title: '登录',
+                    shadeClose: true,
+                    shade: 0.8,
+                    area: ['500PX', '500PX'],
+                    content: 'user/login'
+                });
+            });
 
-            // $(".layui-body".fontsize(0))
+
+
 
         });
 
 
-
-
     </script>
+
+
 </body>
 </html>
 
