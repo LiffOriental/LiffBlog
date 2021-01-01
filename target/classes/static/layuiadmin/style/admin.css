@@ -250,7 +250,8 @@ html{background-color: #f2f2f2; color: #666;}
 
 .layui-side-menu,
 /*.layadmin-setTheme-side{background-color: #20222A; color: #fff;}*/
-.layadmin-setTheme-side{background-color: #ffffff; color: #000000;}
+/*.layadmin-setTheme-side{background-color: #ffffff; color: #000000;}*/
+.layadmin-setTheme-side{ color: #000000;}
 .layadmin-setTheme-header{background-color: #fff;}
 
 .layui-layout-admin .layui-footer{background-color: #fff;}
