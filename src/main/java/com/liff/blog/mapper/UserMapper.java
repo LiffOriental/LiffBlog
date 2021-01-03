@@ -3,6 +3,7 @@ package com.liff.blog.mapper;
 import com.liff.blog.pojo.User;
 import org.apache.ibatis.annotations.*;
 import org.springframework.stereotype.Repository;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 
@@ -16,6 +17,8 @@ public interface UserMapper {
     User findUserById(int userid);
     @Select("select * from user where username=#{username}")
     User findeUserByName(String username);
+    @Select("select * from user where email=#{email}")
+    User findeUserByEmail(String email);
     @Insert("insert into user(userid,username,password,email,role,userimg,registrationtime)values(#{userid},#{username},#{password},#{email},#{role},#{userimg},#{registrationtime})")
     int addUser(User user);
     @Delete("delete from user where userid=#{userid}")

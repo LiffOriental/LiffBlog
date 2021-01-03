@@ -30,6 +30,9 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    public User findUserByEmail(String email){return userMapper.findeUserByEmail(email);}
+
+    @Override
     public int addUser(User user) {
         return userMapper.addUser(user);
     }
