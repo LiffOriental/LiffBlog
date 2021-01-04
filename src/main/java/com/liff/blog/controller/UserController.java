@@ -13,6 +13,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpSession;
 import java.net.http.HttpRequest;
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -32,12 +33,14 @@ public class UserController {
     public String toregister(){
         return "register";
     }
+
     @ResponseBody
     @RequestMapping(value = "/login" ,method = RequestMethod.POST)
     public Object login(@RequestBody Map<String,String> reqMap, Model model, HttpSession session){
 
 
         User user = userService.findUserByEmail(reqMap.get("email"));
+        System.out.println("....");
         if(user == null){
             return 0;
         }else if(user.getPassword().equals(reqMap.get("password"))){
@@ -53,5 +56,25 @@ public class UserController {
 
     }
 
+    @ResponseBody
+    @RequestMapping(value = "/register" ,method = RequestMethod.POST)
+    public Object register(@RequestBody Map<String,String> reqMap, Model model, HttpSession session) {
+
+        User user = new User();
+        user.setUsername(reqMap.get("username"));
+        user.setEmail(reqMap.get("email"));
+        user.setPassword(reqMap.get("password"));
+        user.setRole("用户");
+        Date date=new Date();
+        user.setRegistrationtime(date);
+        userService.addUser(user);
+
+        return user;
+    }
+
+    @RequestMapping("/test")
+    public String test(){
+        return "test";
+    }
 
 }
