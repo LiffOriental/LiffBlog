@@ -16,13 +16,18 @@
 
     <div class="layui-layout layui-layout-admin">
         <img th:src="@{/img/主页2.jpg}" width="1920" height="1000">
+<!--        <img th:src="@{/img/背景.jpg}" style="transform: scale(0.25)">-->
 
         <div th:replace="~{common/common::header(active='test.html')}"></div>
         <div th:replace="~{common/common::sidebar(active='test.html')}"></div>
         <!--        <div class="layui-body layui-bg-blue">内容</div>-->
         <div class="layui-body">
     <!--        margin:-8px;-->
-            <div id="container" style="position:relative;"></div>
+
+            <div class="dbubble-text" id="container" style="position:relative;margin:-8px; overflow: hidden">
+<!--                <img src="/img/头像.jpg" style="transform: scale(0.25)">-->
+            </div>
+
 
 
         </div>
@@ -46,7 +51,7 @@
                     var width = $(window).width(),
                         colNum = 4;
                     if (width >= 1200){
-                        colNum = 5; //大屏幕 4列
+                        colNum = 4; //大屏幕 4列
                     }else if(width >= 992) {
                         colNum = 3; //中屏幕 3列
                     } else if (width >= 768) {
@@ -58,16 +63,15 @@
                 }
                 flow.load({
                     elem: '#container',
-                    isAuto:true,
-                    mb:1000,
+                    // isAuto:true,
+                    // mb:1000,
 
 
 
                     done: function (page, next) {
-                        var lis = [];
-                            pageSize = 8;
+                        var lis = [], pageSize = 8;
 
-                        $.get({
+                        $.ajax({
                             url: '/article/test',
                             data: { pageSize: pageSize, pageIndex: page },
                             success: function (res) {
@@ -77,8 +81,13 @@
                                 if (res.code === 1) {
 
                                     for(var i=0;i<res.count;i++){
-                                        var html = '<div class="grid">';
+                                        var html = '<div class="grid" style="border-radius: 25px">';
+                                        //style="transform: scale(0.3)"  class='grid'
+
+                                        html += '<img src="/img/主页.jpg" width="100%"';
+                                        html += '<h1>'+res.data[i].title+'</h1>';
                                         html += res.data[i].content;
+
                                         html += '</div>';
                                         lis.push(html);
                                     }
@@ -92,6 +101,7 @@
                                     // $(document).ready(function () {
                                     $(function($) {
 
+
                                         var blocksOptions = {
                                             numOfCol: 5,
                                             offsetX: 5,
@@ -100,7 +110,7 @@
                                         };
 
                                         //dynamic variable
-                                        var container, colwidth;
+                                        var containers, colwidth;
                                         var blockarr = [];
 
                                         //ie indexOf fix
@@ -124,6 +134,7 @@
 
                                         //create empty blockarr
                                         var createEmptyBlockarr = function() {
+                                            // alert("createEmptyBlockarr")
                                             //empty blockarr
                                             blockarr = [];
                                             for(var i=0; i<blocksOptions.numOfCol; i++) {
@@ -132,7 +143,8 @@
                                         }
 
                                         //add new block to blockarr
-                                        var blockarrPush = function(id, x, y, width, height) {
+                                        var blockarrPush = function(id, x, y, width, height){
+                                            // alert("blockarrPush")
                                             //define block object based on block width
                                             for(var i=0; i<width; i++) {
                                                 var block = new Object();
@@ -146,6 +158,7 @@
 
                                         //remove block from blockarr
                                         var blockarrRemove = function(x, num) {
+                                            // alert("blockarrRemove")
                                             for(var i=0; i<num; i++) {
                                                 //remove block beside
                                                 var index = getBlockIndex(x+i, 'x');
@@ -155,6 +168,7 @@
 
                                         //retrieve block index based on block's x position
                                         var getBlockIndex = function(value, type) {
+                                            // alert("getBlockIndex")
 
                                             for(var i=0; i<blockarr.length; i++) {
                                                 var obj = blockarr[i];
@@ -169,6 +183,7 @@
                                         //get height from blockarr range based on block.x and size
                                         //retrun min and max height
                                         var getHeightArr = function(x, size) {
+                                            // alert("getHeightArr")
                                             var temparr = [];
                                             for(var i=0; i<size; i++) {
 
@@ -182,6 +197,7 @@
 
                                         //get block x and y position
                                         var getBlockPostion = function(size) {
+                                            // alert("getposition")
 
                                             //if block width is not default 1
                                             //extra algorithm check
@@ -222,6 +238,7 @@
 
                                         //set block position
                                         var setPosition = function(obj, index) {
+                                            // alert("setposition")
                                             // alert(obj)
                                             //check block size
                                             if(!obj.data('size') || obj.data('size') < 0) {
@@ -250,14 +267,24 @@
                                         }
 
                                         $.fn.BlocksIt = function(options) {
+
                                             //BlocksIt options
-                                            if (options && typeof options === 'object') {
-                                                $.extend(blocksOptions, options);
-                                            }
+                                            //影响按钮位置
+                                            // if (options && typeof options === 'object') {
+                                            //     // alert(options)
+                                            //     $.extend(blocksOptions, options);
+                                            // }
 
+
+                                            // alert($(this).find('div').attr('class'))
+
+
+                                            //形成方块
                                             containers = $(this);
+                                            // alert(containers)
+                                            //分开
                                             colwidth = containers.width() / blocksOptions.numOfCol;
-
+                                            //
                                             //create empty blockarr
                                             createEmptyBlockarr();
 
@@ -267,6 +294,7 @@
 
                                             //set final height of container
                                             var heightarr = getHeightArr(0, blockarr.length);
+                                            // alert(blockarr.length)
                                             containers.height(heightarr[1] + blocksOptions.offsetY);
 
                                             return this;
@@ -276,12 +304,12 @@
                                     $('#container').BlocksIt({
 
                                         numOfCol: col(),
-                                        offsetX: 8,
-                                        offsetY: 8,
+                                        offsetX: 10,
+                                        offsetY: 10,
                                         blockElement: '.grid'
                                     });
 
-                                    // })
+
                                 }
 
                             }
