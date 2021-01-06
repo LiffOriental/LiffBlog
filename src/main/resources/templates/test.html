@@ -40,6 +40,7 @@
 
 
         <script th:src="@{/layuiadmin/layui/layui.js}"></script>
+        <script th:src="@{/js/login.js}"></script>
 <!--        <script th:src="@{/js/blocksit.js}"></script>-->
 
         <script>
@@ -64,7 +65,7 @@
                 flow.load({
                     elem: '#container',
                     // isAuto:true,
-                    // mb:1000,
+                    // mb:100,
 
 
 
@@ -75,7 +76,7 @@
                             url: '/article/test',
                             data: { pageSize: pageSize, pageIndex: page },
                             success: function (res) {
-                                // alert(res[0].title)
+                                alert(res.code)
 
                                 // res.code === 1
                                 if (res.code === 1) {
@@ -84,8 +85,8 @@
                                         var html = '<div class="grid" style="border-radius: 25px">';
                                         //style="transform: scale(0.3)"  class='grid'
 
-                                        html += '<img src="/img/主页.jpg" width="100%"';
-                                        html += '<h1>'+res.data[i].title+'</h1>';
+                                        html += '<img src="/img/主页.jpg" width="100%">';
+                                        html += '<h1>'+res.data[i].title+'</h1>'
                                         html += res.data[i].content;
 
                                         html += '</div>';
@@ -109,12 +110,14 @@
                                             blockElement: 'div'
                                         };
 
+
                                         //dynamic variable
                                         var containers, colwidth;
                                         var blockarr = [];
 
                                         //ie indexOf fix
                                         if (!Array.prototype.indexOf) {
+
                                             Array.prototype.indexOf = function(elt /*, from*/) {
                                                 var len = this.length >>> 0;
 
@@ -140,14 +143,16 @@
                                             for(var i=0; i<blocksOptions.numOfCol; i++) {
                                                 blockarrPush('empty-'+i, i, 0, 1, -blocksOptions.offsetY);
                                             }
+
                                         }
 
                                         //add new block to blockarr
                                         var blockarrPush = function(id, x, y, width, height){
-                                            // alert("blockarrPush")
+
                                             //define block object based on block width
                                             for(var i=0; i<width; i++) {
                                                 var block = new Object();
+
                                                 block.x = x + i;
                                                 block.size = width;
                                                 block.endY = y + height + blocksOptions.offsetY*2;
@@ -276,7 +281,7 @@
                                             // }
 
 
-                                            // alert($(this).find('div').attr('class'))
+                                            alert($(this).find('div').attr('class'))
 
 
                                             //形成方块
@@ -320,8 +325,8 @@
 
                 });
                 //
-                $(window).resize(function () {
-                    location.reload();
+                // $(window).resize(function () {
+                //     location.reload();
                 // $(document).ready(function (){
                 //
                 //     $('#container').BlocksIt({
@@ -331,7 +336,7 @@
                 //         offsetY: 8,
                 //         blockElement: '.block'
                 //     });
-                });
+                // });
 
                 // $(window).resize(function () {
                 //

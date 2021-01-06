@@ -61,9 +61,10 @@
             </dl>
         </li>
         <li class="layui-nav-item">
-            <a href="javascript:;">解决方案</a>
+            <a href="javascript:;">个人中心</a>
             <dl class="layui-nav-child">
-                <dd><a href="">移动模块</a></dd>
+<!--                <dd><a th:href="@{/article/toedit}" id="articleedit">文章编写</a></dd>-->
+                <dd><a><button type="button" class="layui-btn" id="articleedit" style="background-color:transparent;color: black">文章编写</button></a></dd>
                 <dd><a href="">后台模版</a></dd>
                 <dd><a href="">电商平台</a></dd>
             </dl>
@@ -87,6 +88,6 @@
 
 
 </div>
-
+<script th:src="@{/js/login.js}"></script>
 </body>
 </html>

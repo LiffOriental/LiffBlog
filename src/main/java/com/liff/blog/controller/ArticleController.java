@@ -2,15 +2,18 @@ package com.liff.blog.controller;
 
 import com.liff.blog.pojo.Article;
 import com.liff.blog.pojo.ArticleCount;
+import com.liff.blog.pojo.User;
 import com.liff.blog.service.ArticleService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.util.List;
 import java.util.Map;
 
@@ -41,6 +44,21 @@ public class ArticleController {
 
             return articleCount;
         }
+    }
+    @RequestMapping("/toedit")
+    public String toedit(){
+        return "edit";
+    }
+
+    @RequestMapping("/edit")
+    @ResponseBody
+    public String edit(@RequestBody Map<String,String> reqMap) {
+
+        Article article = new Article();
+        System.out.println(reqMap);
+
+
+        return "00";
     }
 
 }
