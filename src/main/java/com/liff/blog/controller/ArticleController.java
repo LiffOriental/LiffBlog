@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -55,10 +56,17 @@ public class ArticleController {
     public String edit(@RequestBody Map<String,String> reqMap) {
 
         Article article = new Article();
-        System.out.println(reqMap);
+//        System.out.println(reqMap.get("userid"));
+        article.setUserid(Integer.parseInt(reqMap.get("userid")));
+        article.setContent(reqMap.get("content"));
+        article.setTitle(reqMap.get("title"));
+        Date date=new Date();
+        article.setPublicationdate(date);
+        article.setPp(1);
+        articleService.addArticle(article);
 
 
-        return "00";
+        return "success";
     }
 
 }

@@ -16,6 +16,6 @@ public class Article {
     private String content;
     private int approval;
     private String label;
-    private Date date;
+    private Date publicationdate;
     private int pp;
 }

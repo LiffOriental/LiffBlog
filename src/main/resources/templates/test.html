@@ -24,12 +24,9 @@
         <div class="layui-body">
     <!--        margin:-8px;-->
 
-            <div class="dbubble-text" id="container" style="position:relative;margin:-8px; overflow: hidden">
+            <div class="dbubble-text" id="container" style="position:relative;margin-left: 300px; overflow: hidden">
 <!--                <img src="/img/头像.jpg" style="transform: scale(0.25)">-->
             </div>
-
-
-
         </div>
 
         <!--        <div class="layui-footer layui-bg-green">底部</div>-->
@@ -52,7 +49,7 @@
                     var width = $(window).width(),
                         colNum = 4;
                     if (width >= 1200){
-                        colNum = 4; //大屏幕 4列
+                        colNum = 5; //大屏幕 4列
                     }else if(width >= 992) {
                         colNum = 3; //中屏幕 3列
                     } else if (width >= 768) {
@@ -76,7 +73,7 @@
                             url: '/article/test',
                             data: { pageSize: pageSize, pageIndex: page },
                             success: function (res) {
-                                alert(res.code)
+                                // alert(res.code)
 
                                 // res.code === 1
                                 if (res.code === 1) {
@@ -86,7 +83,7 @@
                                         //style="transform: scale(0.3)"  class='grid'
 
                                         html += '<img src="/img/主页.jpg" width="100%">';
-                                        html += '<h1>'+res.data[i].title+'</h1>'
+                                        html += '<h1 align="center">'+res.data[i].title+'</h1>'
                                         html += res.data[i].content;
 
                                         html += '</div>';
@@ -105,7 +102,7 @@
 
                                         var blocksOptions = {
                                             numOfCol: 5,
-                                            offsetX: 5,
+                                            offsetX: 10,
                                             offsetY: 5,
                                             blockElement: 'div'
                                         };
@@ -281,7 +278,7 @@
                                             // }
 
 
-                                            alert($(this).find('div').attr('class'))
+                                            // alert($(this).find('div').attr('class'))
 
 
                                             //形成方块

@@ -17,31 +17,49 @@
         <div class="layui-form-item" >
             <label class="layui-form-label"><h2>标题</h2></label>
             <div class="layui-input-inline">
-                <input type="text"  required  lay-verify="required" placeholder="请输入标题" autocomplete="off" class="layui-input" style="width: 500px">
+                <input type="text" name="title" required  lay-verify="required" placeholder="请输入标题" autocomplete="off" class="layui-input" style="width: 500px">
             </div>
         </div>
-            <div>
-                <textarea id="demo"></textarea>
-            </div>
         <div class="layui-form-item">
             <div class="layui-input-block">
 
                 <button class="layui-btn" lay-submit="" lay-filter="formDemo" style="background-color: #c0c4cc ;color: black; width: 250px;float: right">提交</button>
             </div>
         </div>
+        <div>
+            <textarea name="content" id="demo"></textarea>
+        </div>
+
     </div>
 </form>
+
 <script th:src="@{/layuiadmin/layui/layui.js}"></script>
 <script>
-    layui.use(['jquery','form', 'layedit', 'laydate'], function(){
+    layui.use(['jquery','form', 'layedit', 'laydate','upload'], function(){
         var $=layui.jquery;
         var form = layui.form
             ,layer = layui.layer
             ,layedit = layui.layedit
-            ,laydate = layui.laydate;
+            ,laydate = layui.laydate
+            ,upload = layui.upload;
         var winheight=window.innerHeight;
 
-        layedit.build('demo', {
+        layedit.set({
+            uploadImage: {
+                url: '/file/upload' //接口url
+                ,type: 'post' //默认post
+                // ,field:"multipartFile"
+                // ,multiple:true
+                // ,before:function (obj){
+                //     obj.preview(function (index,file,result){
+                //         $('#demo').attr('src',result);
+                //     })
+                // },
+
+            }
+        });
+
+        var index=layedit.build('demo', {
             height: winheight*4/5,
             tool: [
                 'strong' //加粗
@@ -59,14 +77,26 @@
                 ,'face' //表情
                 ,'image' //插入图片
                 ,'help' //帮助
-            ]
+            ],
+
+
         }); //建立编辑器
 
+
         form.on('submit(formDemo)', function(data){
+
+            //从session中取出用户信息
+            var sessionStorage = window.sessionStorage;
+            var userjson = JSON.parse(sessionStorage.getItem("user"));
+            var user = $.parseJSON(userjson);
+
+            data.field.userid=user.userid
+            data.field.content = layedit.getContent(index)
             console.log(data.elem) //被执行事件的元素DOM对象，一般为button对象
             console.log(data.form) //被执行提交的form对象，一般在存在form标签时才会返回
             console.log(data.field) //当前容器的全部表单字段，名值对形式：{name: value}
-            alert(data.field)
+            // alert(data.field.title)
+
 
             $.ajax({
                 url:"/article/edit",
@@ -85,9 +115,9 @@
                         alert("用户名或密码错误！");
                     }else{
 
-                        $("#unlogin",window.parent.document).hide();
-                        var sessionStorage = window.parent.sessionStorage;
-                        sessionStorage.setItem("user",JSON.stringify(result));
+                        // $("#unlogin",window.parent.document).hide();
+                        // var sessionStorage = window.parent.sessionStorage;
+                        // sessionStorage.setItem("user",JSON.stringify(result));
 
                         var index = parent.layer.getFrameIndex(window.name);
                         // parent.layer.close(index);
